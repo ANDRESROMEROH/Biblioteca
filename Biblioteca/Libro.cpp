@@ -63,21 +63,25 @@ bool Libro::validarIsbn13(string isbn) {
 		return false;
 	}
 
+	int impar = 0;
+	int par = 0;
 	
 		int total = 0;
 		for (int i = 0; i < 12; i++)
 		{
-			int digito = stoi(isbn.substr(i, i + 1));
-			total += (i % 2 == 0) ? digito * 1 : digito * 3;
+			int digito = stoi(isbn.substr(i, 1));
+			(i % 2 == 0) ? par = par + digito : impar = impar + digito;
 		}
+
+		total = par + (impar * 3);
 
 		//check debe estar entre 0-9. Si se calcula un 10 entonces debe ser = 0
 		int check = 10 - (total % 10);
+
 		if (check == 10)
 		{
 			check = 0;
 		}
 
 		return check == stoi(isbn.substr(12));
-
 }

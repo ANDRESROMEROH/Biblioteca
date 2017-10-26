@@ -6,6 +6,7 @@ using namespace std;
 
 class Libro {
 
+public:
 	Libro(string, string, string, string, int);
 
 	void setNombre(string);
@@ -20,7 +21,7 @@ class Libro {
 	string getDescripcion();
 	int getTipo();
 
-	bool validarIsbn13(string);
+	static bool validarIsbn13(string);
 
 	static const int CIENTIFICO = 0;
 	static const int LITERATURA = 1;
