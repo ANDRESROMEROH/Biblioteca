@@ -146,7 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AVL.h" />
     <ClInclude Include="Libro.h" />
+    <ClInclude Include="Nodo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Libro.cpp" />
