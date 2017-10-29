@@ -18,6 +18,12 @@
     <ClInclude Include="Libro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Nodo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Libro.cpp">
