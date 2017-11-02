@@ -1,16 +1,16 @@
 #pragma once
 #include "Nodo.h"
-/**
-Tomado de: http://www.sanfoundry.com/cpp-program-implement-avl-trees/
-*/
 
-template<classT>
+template<class T>
 class AVL {
 public:
 	AVL();
 	int altura(Nodo<T>*);
 	int factorEquilibrio(Nodo<T>*);
-	Nodo<T>* 
+	Nodo<T>* rotacionDerecha(Nodo<T>*);
+	Nodo<T>* rotacionIzquierda(Nodo<T>*);
+	Nodo<T>* rotacionDobDerecha(Nodo<T>*);
+	Nodo<T>* rotacionDobIzquierda(Nodo<T>*);
 private:
 	Nodo<T> raiz;
 };
@@ -18,18 +18,67 @@ private:
 /////////////////////////| IMPLEMENTACION |/////////////////////////
 
 template<class T>
-AVL<T>::AVL() {}
+AVL<T>::AVL() {
+	
+}
 
 template<class T>
-int AVL<T>::altura(Nodo<T>* nodo) {
+int AVL<T>::altura(Nodo<T>* nodo) { // i: Izquierda, d: Derecha, h: height "Altura"
 	int h = 0;
 	if (nodo != NULL)
 	{
-		int l_height = height(nodo->left);
-		int r_height = height(temp->right);
-		int max_height = max(l_height, r_height);
-		h = max_height + 1;
+		int altura_i = altura(nodo->izquierdo);
+		int altura_d = altura(nodo->derecho);
+		int max_altura = max(altura_i, altura_d);
+		h = max_altura + 1;
 	}
 	return h;
+}
+
+template<class T>
+int AVL<T>::factorEquilibrio(Nodo<T>* nodo) {
+	int altura_d = altura(nodo->derecho);
+	int altura_i = altura(nodo->izquierdo);
+	int factor = altura_d - altura_i;
+
+	return factor;
+}
+
+template<class T>
+Nodo<T>* AVL<T>::rotacionDerecha(Nodo<T>* nodo) {
+	Nodo<T>* aux;
+	aux = nodo->izquierdo;
+	nodo->izquierdo = aux->derecho;
+	aux->derecho = nodo;
+
+	return aux;
+}
+
+template<class T>
+Nodo<T>* AVL<T>::rotacionIzquierda(Nodo<T>* nodo) {
+	Nodo<T>* aux;
+	aux = nodo->derecho;
+	nodo->derecho = aux->izquierdo;
+	aux->izquierdo = nodo;
+
+	return aux;
+}
+
+template<class T>
+Nodo<T>* AVL<T>::rotacionDobDerecha(Nodo<T>* nodo) {
+	Nodo<T>* aux;
+	aux = nodo->derecho;
+	nodo->derecho = rotacionDerecha(aux);
+
+	return rotacionIzquierda(nodo);
+}
+
+template<class T>
+Nodo<T>* AVL<T>::rotacionDobIzquierda(Nodo<T>* nodo) {
+	Nodo<T>* aux;
+	aux = nodo->izquierdo;
+	nodo->derecho = rotacionIzquierda(aux);
+
+	return rotacionDerecha(nodo);
 }
 
