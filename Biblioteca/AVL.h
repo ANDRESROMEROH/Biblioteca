@@ -10,6 +10,7 @@ public:
 	Nodo<T>* rotacionDerecha(Nodo<T>*);
 	Nodo<T>* rotacionIzquierda(Nodo<T>*);
 	Nodo<T>* rotacionDobDerecha(Nodo<T>*);
+	Nodo<T>* rotacionDobIzquierda(Nodo<T>*);
 private:
 	Nodo<T> raiz;
 };
@@ -36,15 +37,25 @@ int AVL<T>::altura(Nodo<T>* nodo) { // i: Izquierda, d: Derecha, h: height "Altu
 
 template<class T>
 int AVL<T>::factorEquilibrio(Nodo<T>* nodo) {
-	int altura_i = altura(nodo->izquierdo);
 	int altura_d = altura(nodo->derecho);
-	int factor = altura_i - altura_d;
+	int altura_i = altura(nodo->izquierdo);
+	int factor = altura_d - altura_i;
 
 	return factor;
 }
 
 template<class T>
 Nodo<T>* AVL<T>::rotacionDerecha(Nodo<T>* nodo) {
+	Nodo<T>* aux;
+	aux = nodo->izquierdo;
+	nodo->izquierdo = aux->derecho;
+	aux->derecho = nodo;
+
+	return aux;
+}
+
+template<class T>
+Nodo<T>* AVL<T>::rotacionIzquierda(Nodo<T>* nodo) {
 	Nodo<T>* aux;
 	aux = nodo->derecho;
 	nodo->derecho = aux->izquierdo;
@@ -54,12 +65,20 @@ Nodo<T>* AVL<T>::rotacionDerecha(Nodo<T>* nodo) {
 }
 
 template<class T>
-Nodo<T>* AVL<T>::rotacionIzquierda(Nodo<T>* nodo) {
+Nodo<T>* AVL<T>::rotacionDobDerecha(Nodo<T>* nodo) {
+	Nodo<T>* aux;
+	aux = nodo->derecho;
+	nodo->derecho = rotacionDerecha(aux);
+
+	return rotacionIzquierda(nodo);
+}
+
+template<class T>
+Nodo<T>* AVL<T>::rotacionDobIzquierda(Nodo<T>* nodo) {
 	Nodo<T>* aux;
 	aux = nodo->izquierdo;
-	nodo->izquierdo = aux->derecho;
-	aux->derecho = nodo;
+	nodo->derecho = rotacionIzquierda(aux);
 
-	return aux;
+	return rotacionDerecha(nodo);
 }
 
