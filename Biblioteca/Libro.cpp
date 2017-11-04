@@ -54,6 +54,11 @@ int Libro::getTipo() {
 	return this->tipo;
 }
 
+string Libro::toString() {
+	stringstream s;
+	s << "Autor: " << autor<<" Nombre "<<nombre<<" codigo: "<<codigo<<" descripcion: "<<descripcion<<" tipo: "<<tipo<<endl;
+	return s.str();
+}
 
 bool Libro::validarIsbn13(string isbn) {
 
@@ -84,4 +89,18 @@ bool Libro::validarIsbn13(string isbn) {
 		}
 
 		return check == stoi(isbn.substr(12));
+}
+
+
+bool Libro::operator<(Libro& libro) {
+	return  this->tipo < libro.tipo;
+}
+
+ostream& operator<<(ostream& os, Libro& libro) {
+	os << libro.toString();
+	return os;
+}
+
+bool Libro::operator>=(Libro& libro) {
+	return  this->tipo >= libro.tipo;
 }

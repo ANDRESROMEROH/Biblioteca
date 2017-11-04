@@ -1,7 +1,7 @@
 #pragma once
-#include<iostream>
-#include<string>
-
+#include <iostream>
+#include <string>
+#include <sstream>
 using namespace std;
 
 class Libro {
@@ -19,8 +19,10 @@ public:
 	string getCodigo();
 	string getAutor();
 	string getDescripcion();
+	string toString();
 	int getTipo();
-
+	bool operator<(Libro&);
+	bool operator>=(Libro&);
 	static bool validarIsbn13(string);
 
 	static const int CIENTIFICO = 0;
@@ -39,3 +41,6 @@ private:
 	string descripcion;
 	int tipo;
 };
+
+
+ostream& operator<<(ostream& os, Libro& libro);
