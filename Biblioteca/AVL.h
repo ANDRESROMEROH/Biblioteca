@@ -34,8 +34,8 @@ public:
 	list<T*> busquedaNombre(Nodo<T>*, list<T*>, string);
 	list<T*> busquedaCodigo(Nodo<T>*, list<T*>, int);
 
+	bool perfecto(Nodo<T>*);
 	bool completo(Nodo<T>*);
-	bool perfecto();
 	bool lleno();
 	int nivel();
 	int peso();
@@ -51,6 +51,7 @@ private:
 template<class T>
 AVL<T>::AVL() {
 	raiz = NULL;
+	n = 0;
 }
 
 template<class T>
@@ -186,7 +187,6 @@ break;
 			}
 		}
 	}
-
 	return true;
 }
 
@@ -278,7 +278,7 @@ list<T*> AVL<T>::busquedaCodigo(Nodo<T>* nodo, list<T*> list, int codigo) {
 
 
 template <class T>
-bool AVL<T>::completo(Nodo<T> *nodo) {
+bool AVL<T>::perfecto(Nodo<T> *nodo) {
 	if (nodo == NULL) {
 		return true;
 	}
@@ -286,9 +286,10 @@ bool AVL<T>::completo(Nodo<T> *nodo) {
 		return false;
 	}
 	else {
-		return completo(nodo->izquierda) == completo(nodo->izquierda);
+		return perfecto(nodo->izquierda) == perfecto(nodo->izquierda);
 	}
 }
+
 
 
 template<class T>
