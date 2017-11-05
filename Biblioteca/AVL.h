@@ -144,6 +144,7 @@ void AVL<T>::setBalance(Nodo<T> *nodo) {
 
 template <class T>
 bool AVL<T>::insertar(T* dato) {
+	//cout << "Libro: " << *dato << endl << endl;
 	if (raiz == NULL) {
 		raiz = new Nodo<T>(dato, NULL,NULL,NULL);
 	}
@@ -154,11 +155,11 @@ bool AVL<T>::insertar(T* dato) {
 				return false;
 			padre = n;
 
-			bool goLeft = *(n->getContenido()) > *dato;
-			n = goLeft ? n->izquierda : n->derecho;
+			bool izquierda = *(n->getContenido()) > *dato;
+			n = izquierda ? n->izquierda : n->derecho;
 
 			if (n == NULL) {
-				if (goLeft) {
+				if (izquierda) {
 					padre->izquierda = new Nodo<T>(dato, padre,NULL,NULL);
 				}
 				else {
@@ -170,7 +171,7 @@ bool AVL<T>::insertar(T* dato) {
 			}
 		}
 	}
-
+	
 	return true;
 }
 
@@ -217,7 +218,7 @@ void AVL<T>::borrar(const T* dato) {
 template<class T>
 void AVL<T>::preOrden(Nodo<T>* nodo) { // raiz, izquierda, Derecha
 	if (nodo != NULL) {
-		cout << nodo->getContenido()->getTipo() << ",";
+		cout << *nodo <<endl;
 		preOrden(nodo->izquierda);
 		preOrden(nodo->derecho);
 	}

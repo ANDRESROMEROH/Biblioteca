@@ -21,8 +21,11 @@ public:
 	string getDescripcion();
 	string toString();
 	int getTipo();
+
 	bool operator<(Libro&);
-	bool operator>=(Libro&);
+	bool operator>(Libro&);
+	bool operator==(Libro&);
+
 	static bool validarIsbn13(string);
 
 	static const int CIENTIFICO = 0;
