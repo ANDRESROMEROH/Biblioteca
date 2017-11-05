@@ -34,7 +34,7 @@ public:
 	list<T*> busquedaNombre(Nodo<T>*, list<T*>, string);
 	list<T*> busquedaCodigo(Nodo<T>*, list<T*>, int);
 
-	bool completo();
+	bool completo(Nodo<T>*);
 	bool perfecto();
 	bool lleno();
 	int nivel();
@@ -181,12 +181,12 @@ bool AVL<T>::insertar(T* dato) {
 					padre->derecho = new Nodo<T>(dato, padre,NULL,NULL);
 				}
 
-				this->rebalancear(padre);
-				break;
+this->rebalancear(padre);
+break;
 			}
 		}
 	}
-	
+
 	return true;
 }
 
@@ -275,6 +275,21 @@ list<T*> AVL<T>::busquedaCodigo(Nodo<T>* nodo, list<T*> list, int codigo) {
 	}
 	return list;
 }
+
+
+template <class T>
+bool AVL<T>::completo(Nodo<T> *nodo) {
+	if (nodo == NULL) {
+		return true;
+	}
+	if (altura(nodo->izquierda) != altura(nodo->derecho)){
+		return false;
+	}
+	else {
+		return completo(nodo->izquierda) == completo(nodo->izquierda);
+	}
+}
+
 
 template<class T>
 void AVL<T>::preOrden(Nodo<T>* nodo) { // raiz, izquierda, Derecha
