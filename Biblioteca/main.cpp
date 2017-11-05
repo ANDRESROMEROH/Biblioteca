@@ -26,9 +26,10 @@ void main() {
 	t.insertar(&l6);
 	t.insertar(&l7);
 
-//	t.preOrden(t.getRaiz());
+	t.eliminarLibrosTipo(t.getRaiz(),Libro::DE_TEXTO);
+	t.preOrden(t.getRaiz());
 
-	list<Libro*> libros;
+	/*list<Libro*> libros;
 
 	libros = t.busquedaCodigo(t.getRaiz(),libros,13);
 
@@ -36,7 +37,7 @@ void main() {
 	{
 		cout << *var;
 		cout << " - ";
-	}
+	}*/
 
 
 	system("pause");

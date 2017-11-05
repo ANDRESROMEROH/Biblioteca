@@ -5,7 +5,7 @@ template <class T>
 class Nodo {
 public:
 	Nodo(T*,Nodo<T>*,Nodo<T>*,Nodo<T>*);
-	Nodo<T>* izquierda;
+	Nodo<T>* izquierdo;
 	Nodo<T>* derecho;
 	Nodo<T>* padre;
 	T* getContenido();
@@ -26,7 +26,7 @@ ostream& operator<<(ostream& os, Nodo<T>& t) {
 
 template<class T>
 Nodo<T>::Nodo(T* _contenido, Nodo<T>* _papa, Nodo<T>* _izquierda, Nodo<T>* _derecho):
-	contenido(_contenido),izquierda(_izquierda),
+	contenido(_contenido),izquierdo(_izquierda),
 	derecho(_derecho),padre(_papa),factorEquilibrio(0){}
 
 template<class T>
