@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<list>
 #include"Libro.h"
 #include "Nodo.h"
 #include "AVL.h"
@@ -10,12 +11,12 @@ void main() {
 	AVL<Libro> t;
 
 	Libro l1("The Maze Runner","10","James Dashner","Empty",Libro::DE_TEXTO);
-	Libro l2("The Maze Runner", "5", "James Dashner", "Empty", Libro::DE_TEXTO);
-	Libro l3("The Maze Runner", "13", "James Dashner", "Empty", Libro::DE_TEXTO);
-	Libro l4("The Maze Runner", "1", "James Dashner", "Empty", Libro::DE_TEXTO);
-	Libro l5("The Maze Runner", "6", "James Dashner", "Empty", Libro::DE_TEXTO);
-	Libro l6("The Maze Runner", "17", "James Dashner", "Empty", Libro::DE_TEXTO);
-	Libro l7("The Maze Runner", "16", "James Dashner", "Empty", Libro::DE_TEXTO);
+	Libro l2("Caperucita", "5", "Justin Toto", "Empty", Libro::DE_TEXTO);
+	Libro l3("Cronicas de Narnia", "13", "James Dashner", "Empty", Libro::DE_TEXTO);
+	Libro l4("Matematicas1", "1", "James Dashner", "Empty", Libro::DE_TEXTO);
+	Libro l5("Scorpion", "6", "James Dashner", "Empty", Libro::DE_TEXTO);
+	Libro l6("Mortal Kombat", "17", "James Dashner", "Empty", Libro::DE_TEXTO);
+	Libro l7("Programacion para Noobs", "16", "James Dashner", "Empty", Libro::BIOGRAFIA);
 
 	t.insertar(&l1);
 	t.insertar(&l2);
@@ -25,7 +26,18 @@ void main() {
 	t.insertar(&l6);
 	t.insertar(&l7);
 
-	t.preOrden(t.getRaiz());
+//	t.preOrden(t.getRaiz());
+
+	list<Libro*> libros;
+
+	libros = t.busquedaCodigo(t.getRaiz(),libros,13);
+
+	for each (Libro* var in libros)
+	{
+		cout << *var;
+		cout << " - ";
+	}
+
 
 	system("pause");
 }

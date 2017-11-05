@@ -2,6 +2,8 @@
 #include "Nodo.h"
 #include <iostream>
 #include <algorithm>
+#include <string>
+#include <list>
 using namespace std;
 
 template <class T>
@@ -24,6 +26,20 @@ public:
 	void AVL<T>::preOrden(Nodo<T>* nodo);
 	void AVL<T>::inOrden(Nodo<T>* nodo);
 	void AVL<T>::postOrden(Nodo<T>* nodo);
+
+	//Funciones no genericas:
+
+	list<T*> busquedaTipo(Nodo<T>*,list<T*>,int);
+	list<T*> busquedaAutor(Nodo<T>*, list<T*>, string);
+	list<T*> busquedaNombre(Nodo<T>*, list<T*>, string);
+	list<T*> busquedaCodigo(Nodo<T>*, list<T*>, int);
+
+	bool completo();
+	bool perfecto();
+	bool lleno();
+	int nivel();
+	int peso();
+
 private:
 	Nodo<T> *raiz;
 };
@@ -144,7 +160,6 @@ void AVL<T>::setBalance(Nodo<T> *nodo) {
 
 template <class T>
 bool AVL<T>::insertar(T* dato) {
-	//cout << "Libro: " << *dato << endl << endl;
 	if (raiz == NULL) {
 		raiz = new Nodo<T>(dato, NULL,NULL,NULL);
 	}
@@ -180,10 +195,10 @@ void AVL<T>::borrar(const T* dato) {
 	if (raiz == NULL)
 		return;
 
-	Nodo<T> *n = raiz;
+	Nodo<T>* n = raiz;
 	Nodo<T>* padre = raiz;
-	Nodo<T>*borrarNodo = NULL;
-	Nodo<T>*hijo = raiz;
+	Nodo<T>* borrarNodo = NULL;
+	Nodo<T>* hijo = raiz;
 
 	while (hijo != NULL) {
 		padre = n;
@@ -213,7 +228,53 @@ void AVL<T>::borrar(const T* dato) {
 	}
 }
 
-/*OPERADOR << SOBRECARGADO*/
+template<class T>
+list<T*> AVL<T>::busquedaTipo(Nodo<T>* nodo, list<T*> list, int tipo) {
+	if (nodo != NULL) {
+		if (nodo->getContenido()->getTipo() == tipo) {
+			list.push_back(nodo->getContenido());
+		}
+		list = busquedaTipo(nodo->izquierda, list, tipo);
+		list = busquedaTipo(nodo->derecho, list, tipo);
+	}
+	return list;
+}
+
+template<class T>
+list<T*> AVL<T>::busquedaAutor(Nodo<T>* nodo, list<T*> list, string autor) {
+	if (nodo != NULL) {
+		if (autor.compare(nodo->getContenido()->getAutor()) == 0) {
+			list.push_back(nodo->getContenido());
+		}
+		list = busquedaAutor(nodo->izquierda, list, autor);
+		list = busquedaAutor(nodo->derecho, list, autor);
+	}
+	return list;
+}
+
+template<class T>
+list<T*> AVL<T>::busquedaNombre(Nodo<T>* nodo, list<T*> list, string nombre) {
+	if (nodo != NULL) {
+		if (nombre.compare(nodo->getContenido()->getNombre()) == 0) {
+			list.push_back(nodo->getContenido());
+		}
+		list = busquedaNombre(nodo->izquierda, list, nombre);
+		list = busquedaNombre(nodo->derecho, list, nombre);
+	}
+	return list;
+}
+
+template<class T>
+list<T*> AVL<T>::busquedaCodigo(Nodo<T>* nodo, list<T*> list, int codigo) {
+	if (nodo != NULL) {
+		if (stoi(nodo->getContenido()->getCodigo()) == codigo) {
+			list.push_back(nodo->getContenido());
+		}
+		list = busquedaCodigo(nodo->izquierda, list, codigo);
+		list = busquedaCodigo(nodo->derecho, list, codigo);
+	}
+	return list;
+}
 
 template<class T>
 void AVL<T>::preOrden(Nodo<T>* nodo) { // raiz, izquierda, Derecha
