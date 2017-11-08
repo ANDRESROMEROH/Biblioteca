@@ -93,14 +93,18 @@ bool Libro::validarIsbn13(string isbn) {
 
 
 bool Libro::operator<(Libro& libro) {
-	return  this->tipo < libro.tipo;
+	return  stoi(this->codigo) < stoi(libro.codigo);
 }
 
 ostream& operator<<(ostream& os, Libro& libro) {
-	os << libro.toString();
+	os << libro.getCodigo();
 	return os;
 }
 
-bool Libro::operator>=(Libro& libro) {
-	return  this->tipo >= libro.tipo;
+bool Libro::operator>(Libro& libro) {
+	return  stoi(this->codigo) > stoi(libro.codigo);
+}
+
+bool Libro::operator==(Libro& libro) {
+	return stoi(this->codigo) == stoi(libro.codigo);
 }
