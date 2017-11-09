@@ -40,7 +40,7 @@ public:
 
 	bool esPerfecto(Nodo<T>*);
 	bool esCompleto(Nodo<T>*);
-	bool esLleno();
+	bool esLleno(Nodo<T>*);
 	int nivel(Libro*, Nodo<T>*);
 	int peso();
 
@@ -396,8 +396,16 @@ void AVL<T>::guardar(ostream& salida, Nodo<T>* nodo) {
 }
 
 template<class T>
-bool AVL<T>::esLleno() {
-
+bool AVL<T>::esLleno(Nodo<T>* nodo) {
+	bool _bool = true;
+	if (raiz->derecho == NULL && raiz->izquierdo == NULL) { return true; }
+	if (nodo->derecho == NULL && nodo->izquierdo == NULL) { return true; }
+	if (nodo->derecho != NULL && nodo->izquierdo != NULL) {
+		return esLleno(nodo->derecho) && esLleno(nodo->izquierdo);
+	}
+	else {
+		return false;
+	}
 }
 
 template<class T>
