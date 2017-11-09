@@ -16,17 +16,18 @@ void main() {
 	Libro l3("Cronicas de Narnia", "13", "James Dashner", "Empty", Libro::DE_TEXTO);
 	Libro l4("Matematicas1", "1", "James Dashner", "Empty", Libro::DE_TEXTO);
 	Libro l5("Scorpion", "6", "James Dashner", "Empty", Libro::DE_TEXTO);
-	//Libro l6("Mortal Kombat", "17", "James Dashner", "Empty", Libro::DE_TEXTO);
+	Libro l6("Mortal Kombat", "17", "James Dashner", "Empty", Libro::DE_TEXTO);
 	//Libro l7("Programacion para Noobs", "16", "James Dashner", "Empty", Libro::BIOGRAFIA);
 
 	t.insertar(&l1);
-	t.insertar(&l2);
-	t.insertar(&l3);
-	t.insertar(&l4);
-	t.insertar(&l5);
+	//t.insertar(&l2);
+	//t.insertar(&l3);
+	//t.insertar(&l4);
+	//t.insertar(&l5);
 	//t.insertar(&l6);
 	//t.insertar(&l7);
 	cout << "NIVEL: " << t.nivel(&l5, t.getRaiz()) << endl;
+	cout << "es lleno: " << t.esLleno(t.getRaiz())<<endl;
 	////t.eliminarLibrosTipo(t.getRaiz(),Libro::DE_TEXTO);
 	//t.preOrden(t.getRaiz());
 
