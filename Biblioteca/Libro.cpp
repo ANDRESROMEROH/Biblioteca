@@ -4,7 +4,21 @@ Libro::Libro(string nb, string cod, string aut, string dcp, int tip):nombre(nb),
 	
 }
 
+Libro::Libro(istream& entrada) {
+	string numaux = " ";
+	getline(entrada, nombre);
+	getline(entrada, codigo);
+	getline(entrada, autor);
+	getline(entrada, descripcion);
+	getline(entrada, numaux);
+	tipo = atoi(numaux.c_str());
+}
 
+void Libro::guardar(ostream& ostream) {
+	ostream << nombre << "\n" << codigo << "\n" << autor << "\n" << descripcion << "\n" << tipo << "\n";
+}
+
+		
 void Libro::setNombre(string nb) {
 	this->nombre = nb;
 }
