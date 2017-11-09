@@ -4,12 +4,16 @@
 #include <algorithm>
 #include <string>
 #include <list>
+#include <fstream>
+#include "Libro.h"
 using namespace std;
 
 template <class T>
 class AVL {
 public:
 	AVL();
+	AVL(istream&);
+	void guardar(ostream&, Nodo<T>*);
 	bool insertar(T*);
 	Nodo<T>* getRaiz();
 	int cantidad(Nodo<T>*); // Cantidadd de nodos total.
@@ -37,7 +41,7 @@ public:
 	bool esPerfecto(Nodo<T>*);
 	bool esCompleto(Nodo<T>*);
 	bool esLleno();
-	int nivel();
+	int nivel(Libro*, Nodo<T>*);
 	int peso();
 
 	void eliminarCodigo(string); //Elimina por codigo.
@@ -57,6 +61,19 @@ AVL<T>::AVL() {
 }
 
 template<class T>
+AVL<T>::AVL(istream& entrada) {
+	raiz = NULL;
+	string numaux = " ";getline(entrada, numaux);
+	int n = 1;
+	int total = atoi(numaux.c_str());
+	while (n != total) {
+		Libro *l = new Libro(entrada);
+		insertar(l);
+		n++;
+	}
+}
+
+template<class T>
 Nodo<T>* AVL<T>::getRaiz() {
 	return raiz;
 }
@@ -64,7 +81,7 @@ Nodo<T>* AVL<T>::getRaiz() {
 template<class T>
 int AVL<T>::cantidad(Nodo<T>* nodo) {
 	if (nodo == NULL) {
-		return (0)
+		return (0);
 	}
 	return (1 + cantidad(nodo->izquierdo) + cantidad(nodo->derecho));
 }
@@ -365,5 +382,33 @@ void AVL<T>::postOrden(Nodo<T>* nodo) {//izquierda,derecha,raiz
 		postOrden(nodo->izquierdo);
 		postOrden(nodo->derecho);
 		cout << *nodo->getContenido() << ",";
+	}
+}
+
+template<class T>
+void AVL<T>::guardar(ostream& salida, Nodo<T>* nodo) {
+	//recorrer todo el arbol y guardar la informacion
+	if (nodo != NULL) {
+		nodo->getContenido()->guardar(salida);
+		guardar(salida, nodo->izquierdo);
+		guardar(salida, nodo->derecho);
+	}
+}
+
+template<class T>
+bool AVL<T>::esLleno() {
+
+}
+
+template<class T>
+int AVL<T>::nivel(Libro* buscar,Nodo<T>* nodo) {//nodo a buscar, nodo iterador
+	if (buscar == raiz->getContenido()) { return 0; }
+	if (nodo == NULL) { return 0; }
+	if (nodo->getContenido() == buscar) { return 0; }
+	if (buscar < nodo->getContenido()) {
+		return 1 + nivel(buscar, nodo->izquierdo);
+	}
+	else {
+		return 1 + nivel(buscar, nodo->derecho);
 	}
 }
