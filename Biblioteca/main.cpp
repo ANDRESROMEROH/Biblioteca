@@ -153,19 +153,19 @@ void main() {
 
 					if (funcion == "3") {
 						system("cls");
-						cout << "Digite el nombre del autor: "; cin >> autor; system("cls");
+						cout << "Digite el nombre del autor: "; cin.ignore(); getline(cin, autor); system("cls");
 
 						resultados = t.busquedaAutor(t.getRaiz(), resultados, autor); system("cls");
-						mostrar(resultados); cout << endl; system("pause");
+						mostrar(resultados); system("pause");
 						resultados.clear();
 					}else
 
 					if (funcion == "4") {
 						system("cls");
-						cout << "Digite el nombre del libro: "; cin >> nombre; system("cls");
+						cout << "Digite el nombre del libro: "; cin.ignore(); getline(cin, nombre); system("cls");
 
 						resultados = t.busquedaNombre(t.getRaiz(), resultados, nombre); system("cls");
-						mostrar(resultados); cout << endl; system("pause");
+						mostrar(resultados); system("pause");
 						resultados.clear();
 					}else
 
@@ -180,59 +180,64 @@ void main() {
 					if (funcion == "6") {
 						system("cls");
 						if (t.esCompleto(t.getRaiz())) {
-							cout << "El arbol es completo!" << endl;
+							cout << "El arbol es completo!" << endl << endl;
 						}
 						else {
-							cout << "El arbol NO es completo!" << endl;
+							cout << "El arbol NO es completo!" << endl << endl;
 						}system("pause");
 					}else
 
 					if (funcion == "7") {
 						system("cls");
 						if (t.esPerfecto(t.getRaiz())) {
-							cout << "El arbol es perfecto!" << endl;
+							cout << "El arbol es perfecto!" << endl << endl;
 						}
 						else {
-							cout << "El arbol NO es perfecto!" << endl;
+							cout << "El arbol NO es perfecto!" << endl << endl;
 						}system("pause");
 					}else
 
 					if (funcion == "8") {
 						system("cls");
 						if (t.esLleno(t.getRaiz())) {
-							cout << "El arbol es lleno!" << endl;
+							cout << "El arbol es lleno!" << endl << endl;
 						}
 						else {
-							cout << "El arbol NO es lleno!" << endl;
+							cout << "El arbol NO es lleno!" << endl << endl;
 						}system("pause");
 					}else
 
 					if (funcion == "9") {
 						system("cls");
-						cout << "La altura del arbol es: " << t.altura(t.getRaiz()); system("pause");
+						cout << "La altura del arbol es: " << t.altura(t.getRaiz()) << endl << endl;
+						system("pause");
 					}else
 
 					if (funcion == "10") {
 						system("cls");
 						cout << "Digite el codigo del libro: "; cin >> cod;
-						cout << "El nivel es " << t.nivel(t.busquedaCodigo(t.getRaiz(), cod), t.getRaiz());
+						cout << "El nivel es " << t.nivel(t.busquedaCodigo(t.getRaiz(), cod), t.getRaiz()) << endl << endl;
+						system("pause");
 					}else
 
 					if (funcion == "11") {
 						system("cls");
-						cout << "El peso del arbol es "<<t.peso(); cin >> cod;
+						cout << "El peso del arbol es " << t.peso() << endl << endl;
+						system("pause");
 					}else
 
 					if (funcion == "12") {
 						system("cls");
-						cout << "No implementado...." << t.peso(); cin >> cod;
+						cout << "La altura del arbol es " << t.altura(t.getRaiz()) << endl << endl;
+						system("pause");
 					}else
 
 					if (funcion == "13") {
 						system("cls");
 						cout << "Digite el codigo del libro: "; cin >> codigo;
 						t.eliminarCodigo(codigo);
-						cout << "Se ha eliminado el libro!..." << endl;
+						cout << "Se ha eliminado el libro!..." << endl << endl;
+						system("pause");
 					}else
 
 					if (funcion == "14") {
