@@ -70,7 +70,11 @@ int Libro::getTipo() {
 
 string Libro::toString() {
 	stringstream s;
-	s << "Autor: " << autor<<" Nombre "<<nombre<<" codigo: "<<codigo<<" descripcion: "<<descripcion<<" tipo: "<<tipo<<endl;
+	s << " Autor: " << autor << endl;
+	s << " Nombre: " << nombre << endl;
+	s << " Codigo ISBN: " << codigo << endl;
+	s << " Descripcion: " << descripcion << endl;
+	s << " Tipo: " << tipo << endl << endl;
 	return s.str();
 }
 
@@ -111,7 +115,7 @@ bool Libro::operator<(Libro& libro) {
 }
 
 ostream& operator<<(ostream& os, Libro& libro) {
-	os << libro.getCodigo();
+	os << libro.toString();
 	return os;
 }
 

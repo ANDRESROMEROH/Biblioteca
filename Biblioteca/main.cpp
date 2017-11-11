@@ -34,6 +34,7 @@ void main() {
 	int cod;
 
 	while (running) {
+		system("cls");
 		cout << "-----> SISTEMA DE BIBLIOTECA <------" << endl << endl;
 
 		cout << "A continuacion digite la opcion en la flecha inferior:" << endl << endl;
@@ -48,7 +49,7 @@ void main() {
 			if (opcion != '1' && opcion != '2' && opcion != '3' && opcion != '4') throw std::exception();
 		}
 		catch (const std::exception &e) {
-			cerr << " No es una opcion valida, por favor inserte una opcion valida.";
+			cerr << " No es una opcion valida, por favor inserte una opcion valida-> ";
 			cin.get(); cin.get(); opcion = '0';
 		}
 
@@ -72,7 +73,7 @@ void main() {
 			funciones = true;
 
 			while (funciones) {
-				system("cls"); cout << endl << endl;
+				system("cls"); cout << endl;
 				cout << "-----> FUNCIONES <------" << endl << endl;
 				cout << "[1] Para incluir un nuevo libro en el arbol." << endl;
 				cout << "[2] Para buscar libros por tipo de libro." << endl;
@@ -87,7 +88,7 @@ void main() {
 				cout << "[11] Para mostrar el peso del arbol." << endl;
 				cout << "[12] Para mostrar la altura del arbol." << endl;
 				cout << "[13] Para eliminar un libro por codigo ISBN." << endl;
-				cout << "[14] Para eliminar todos los libros de un tipo." << endl << endl;
+				cout << "[14] Para eliminar todos los libros de un tipo." << endl;
 				cout << "[15] Retroceder." << endl << endl;
 
 
@@ -100,7 +101,7 @@ void main() {
 						&& funcion != "13" && funcion != "14" && funcion != "15") throw std::exception();
 				}
 				catch (const std::exception &e) {
-					cerr << " No es una opcion valida, por favor inserte una opcion valida.";
+					cerr << " No es una opcion valida, por favor inserte una opcion valida-> ";
 					cin.get(); cin.get(); opcion = '0';
 				}
 
@@ -147,7 +148,7 @@ void main() {
 
 						resultados = t.busquedaTipo(t.getRaiz(),resultados,tipo); system("cls");
 						mostrar(resultados); cout << endl; system("pause");
-
+						resultados.clear();
 					}else
 
 					if (funcion == "3") {
@@ -156,7 +157,7 @@ void main() {
 
 						resultados = t.busquedaAutor(t.getRaiz(), resultados, autor); system("cls");
 						mostrar(resultados); cout << endl; system("pause");
-
+						resultados.clear();
 					}else
 
 					if (funcion == "4") {
@@ -165,6 +166,7 @@ void main() {
 
 						resultados = t.busquedaNombre(t.getRaiz(), resultados, nombre); system("cls");
 						mostrar(resultados); cout << endl; system("pause");
+						resultados.clear();
 					}else
 
 					if (funcion == "5") {
