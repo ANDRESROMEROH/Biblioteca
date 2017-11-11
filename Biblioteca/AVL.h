@@ -36,12 +36,12 @@ public:
 	list<T*> busquedaTipo(Nodo<T>*,list<T*>,int);
 	list<T*> busquedaAutor(Nodo<T>*, list<T*>, string);
 	list<T*> busquedaNombre(Nodo<T>*, list<T*>, string);
-	list<T*> busquedaCodigo(Nodo<T>*, list<T*>, int);
+	T* busquedaCodigo(Nodo<T>*, int);
 
 	bool esPerfecto(Nodo<T>*);
 	bool esCompleto(Nodo<T>*);
 	bool esLleno(Nodo<T>*);
-	int nivel(Libro*, Nodo<T>*);
+	int nivel(T*, Nodo<T>*);
 	int peso();
 
 	void eliminarCodigo(string); //Elimina por codigo.
@@ -307,15 +307,16 @@ list<T*> AVL<T>::busquedaNombre(Nodo<T>* nodo, list<T*> list, string nombre) {
 }
 
 template<class T>
-list<T*> AVL<T>::busquedaCodigo(Nodo<T>* nodo, list<T*> list, int codigo) {
+T* AVL<T>::busquedaCodigo(Nodo<T>* nodo, int codigo) {
 	if (nodo != NULL) {
 		if (stoi(nodo->getContenido()->getCodigo()) == codigo) {
-			list.push_back(nodo->getContenido());
+			return nodo->getContenido();
 		}
-		list = busquedaCodigo(nodo->izquierdo, list, codigo);
-		list = busquedaCodigo(nodo->derecho, list, codigo);
+		busquedaCodigo(nodo->izquierdo, codigo);
+		busquedaCodigo(nodo->derecho, codigo);
 	}
-	return list;
+	if (nodo == NULL)
+		return NULL;
 }
 
 
@@ -328,7 +329,7 @@ bool AVL<T>::esPerfecto(Nodo<T> *nodo) {
 		return false;
 	}
 	else {
-		return perfecto(nodo->izquierdo) == perfecto(nodo->izquierdo);
+		return esPerfecto(nodo->izquierdo) == esPerfecto(nodo->izquierdo);
 	}
 }
 
@@ -339,12 +340,12 @@ bool AVL<T>::esCompleto(Nodo<T>* nodo) {
 		return true;
 	}
 	// Si los hijos son "NULL"
-	if (nodo->izquierdo == NULL && nodo->derecha == NULL) {
+	if (nodo->izquierdo == NULL && nodo->derecho == NULL) {
 		return true;
 	}
 	// Si los hijos izquierdos y derechos no son "NULL" verifica el resto de subArboles
-	if ((nodo->izquierdo) && (nodo->derecha)) {
-		return (esCompleto(nodo->izquierdo) && isFullTree(nodo->derecho));
+	if ((nodo->izquierdo) && (nodo->derecho)) {
+		return (esCompleto(nodo->izquierdo) && esCompleto(nodo->derecho));
 	}
 
 	return false;
@@ -409,7 +410,7 @@ bool AVL<T>::esLleno(Nodo<T>* nodo) {
 }
 
 template<class T>
-int AVL<T>::nivel(Libro* buscar,Nodo<T>* nodo) {//nodo a buscar, nodo iterador
+int AVL<T>::nivel(T* buscar,Nodo<T>* nodo) {//nodo a buscar, nodo iterador
 	if (buscar == raiz->getContenido()) { return 0; }
 	if (nodo == NULL) { return 0; }
 	if (nodo->getContenido() == buscar) { return 0; }
