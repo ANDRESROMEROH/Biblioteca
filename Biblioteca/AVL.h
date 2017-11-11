@@ -36,7 +36,7 @@ public:
 	list<T*> busquedaTipo(Nodo<T>*,list<T*>,int);
 	list<T*> busquedaAutor(Nodo<T>*, list<T*>, string);
 	list<T*> busquedaNombre(Nodo<T>*, list<T*>, string);
-	T* busquedaCodigo(Nodo<T>*, int);
+	T* busquedaCodigo(Nodo<T>*, string, T*);
 
 	bool esPerfecto(Nodo<T>*);
 	bool esCompleto(Nodo<T>*);
@@ -232,8 +232,8 @@ void AVL<T>::eliminarCodigo(string codigo) {
 	while (hijo != NULL) {
 		padre = n;
 		n = hijo;
-		hijo = stoi(codigo) >= stoi(n->getContenido()->getCodigo()) ? n->derecho : n->izquierdo;
-		if (stoi(codigo) == stoi(n->getContenido()->getCodigo()))
+		hijo = stod(codigo) >= stod(n->getContenido()->getCodigo()) ? n->derecho : n->izquierdo;
+		if (stod(codigo) == stod(n->getContenido()->getCodigo()))
 			borrarNodo = n;
 	}
 
@@ -242,7 +242,7 @@ void AVL<T>::eliminarCodigo(string codigo) {
 
 		hijo = n->izquierdo != NULL ? n->izquierdo : n->derecho;
 
-		if (stoi(raiz->getContenido()->getCodigo()) == stoi(codigo)) {
+		if (stod(raiz->getContenido()->getCodigo()) == stod(codigo)) {
 			raiz = hijo;
 		}
 		else {
@@ -307,16 +307,16 @@ list<T*> AVL<T>::busquedaNombre(Nodo<T>* nodo, list<T*> list, string nombre) {
 }
 
 template<class T>
-T* AVL<T>::busquedaCodigo(Nodo<T>* nodo, int codigo) {
+T* AVL<T>::busquedaCodigo(Nodo<T>* nodo, string codigo, T* resultado) {
 	if (nodo != NULL) {
-		if (stoi(nodo->getContenido()->getCodigo()) == codigo) {
-			return nodo->getContenido();
+		if (stod(nodo->getContenido()->getCodigo()) == stod(codigo)) {
+			resultado = nodo->getContenido();
 		}
-		busquedaCodigo(nodo->izquierdo, codigo);
-		busquedaCodigo(nodo->derecho, codigo);
+		resultado = busquedaCodigo(nodo->izquierdo, codigo, resultado);
+		resultado = busquedaCodigo(nodo->derecho, codigo, resultado);
 	}
-	if (nodo == NULL)
-		return NULL;
+
+	return resultado;
 }
 
 

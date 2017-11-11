@@ -9,6 +9,7 @@ class Libro {
 public:
 	Libro(string, string, string, string, int);
 	Libro(istream&);
+	Libro();
 	void guardar(ostream&);
 
 	void setNombre(string);

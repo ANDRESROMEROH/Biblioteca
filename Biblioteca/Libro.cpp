@@ -14,6 +14,10 @@ Libro::Libro(istream& entrada) {
 	tipo = atoi(numaux.c_str());
 }
 
+Libro::Libro() {
+
+}
+
 void Libro::guardar(ostream& ostream) {
 	ostream << nombre << "\n" << codigo << "\n" << autor << "\n" << descripcion << "\n" << tipo << "\n";
 }
@@ -111,7 +115,7 @@ bool Libro::validarIsbn13(string isbn) {
 
 
 bool Libro::operator<(Libro& libro) {
-	return  stoi(this->codigo) < stoi(libro.codigo);
+	return  stod(this->codigo) < stod(libro.codigo);
 }
 
 ostream& operator<<(ostream& os, Libro& libro) {
@@ -120,9 +124,9 @@ ostream& operator<<(ostream& os, Libro& libro) {
 }
 
 bool Libro::operator>(Libro& libro) {
-	return  stoi(this->codigo) > stoi(libro.codigo);
+	return  stod(this->codigo) > stod(libro.codigo);
 }
 
 bool Libro::operator==(Libro& libro) {
-	return stoi(this->codigo) == stoi(libro.codigo);
+	return stod(this->codigo) == stod(libro.codigo);
 }
