@@ -173,7 +173,7 @@ void main() {
 						system("cls");
 						cout << "Digite el codigo ISBN del libro: "; cin >> cod; system("cls");
 
-						resultado = t.busquedaCodigo(t.getRaiz(),  cod); system("cls");
+						resultado = t.busquedaCodigo(t.getRaiz(),  cod, new Libro()); system("cls");
 						cout << resultado << endl; system("pause");
 					}else
 
@@ -216,7 +216,7 @@ void main() {
 					if (funcion == "10") {
 						system("cls");
 						cout << "Digite el codigo del libro: "; cin >> cod;
-						cout << "El nivel es " << t.nivel(t.busquedaCodigo(t.getRaiz(), cod), t.getRaiz()) << endl << endl;
+						cout << "El nivel es " << t.nivel(t.busquedaCodigo(t.getRaiz(), cod, new Libro()), t.getRaiz()) << endl << endl;
 						system("pause");
 					}else
 
@@ -249,7 +249,7 @@ void main() {
 						cout << "[4] De Referencia." << endl;
 						cout << "[5] Monografia." << endl;
 						cout << "[6] Recreativo." << endl;
-						cout << "[6] Poetico." << endl << endl;
+						cout << "[7] Poetico." << endl << endl;
 						cout << "Tipo -> "; cin >> tipo;
 
 						t.eliminarLibrosTipo(t.getRaiz(),tipo);
